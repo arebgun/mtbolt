@@ -1,0 +1,9 @@
+<h1>{{ scene.name }}</h1>
+
+<img src="{{ scene.image.url }}">
+
+<ul>
+    {% for entity in scene.entities.all %}
+        <li>{{ entity.name }}</li>
+    {% endfor %}
+</ul>
