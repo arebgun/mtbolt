@@ -15,6 +15,9 @@ class Entity(models.Model):
     scene = models.ForeignKey(Scene, related_name='entities')
     name = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name_plural = 'entities'
+
     def __unicode__(self):
         return self.name
 
