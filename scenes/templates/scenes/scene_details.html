@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} :: {{ scene.name }}{% endblock %}
+
+{% block content %}
 <h1>{{ scene.name }}</h1>
 
 <img src="{{ scene.image.url }}">
@@ -7,3 +12,4 @@
         <li>{{ entity.name }}</li>
     {% endfor %}
 </ul>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib import messages
 from scenes.models import Scene
 from scenes.forms import FreeTextQuestionForm
 
@@ -9,6 +10,7 @@ def freetext_question(request):
         if form.is_valid():
             form.save()
             s = form.cleaned_data['scene']
+            messages.success(request, 'Thanks!')
             return redirect('scene_details', s.pk)
         else:
             # the scene and entity ids SHOULD be in the post data
