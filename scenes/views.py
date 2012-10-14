@@ -6,16 +6,16 @@ from scenes.forms import FreeTextQuestionForm
 
 def freetext_question(request):
     if request.method == 'POST':
-        form = FreeTextQuestionForm(request.POST)
+        # the scene and entity ids *should* be in the POST data
+        s = Scene.objects.get(pk=request.POST['scene'][0])
+        e = s.entities.get(pk=request.POST['entity'][0])
+        form = FreeTextQuestionForm(request.POST, question='%s is' % e.name)
+
         if form.is_valid():
             form.save()
-            s = form.cleaned_data['scene']
             messages.success(request, 'Thanks!')
+            s = form.cleaned_data['scene']
             return redirect('scene_details', s.pk)
-        else:
-            # the scene and entity ids SHOULD be in the post data
-            s = Scene.objects.get(pk=request.POST['scene'][0])
-            e = s.entities.get(pk=request.POST['entity'][0])
     else:
         # get a random scene and a random entity in the scene
         # NOTE this is very inefficient, but it's the easiest way to do it
