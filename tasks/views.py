@@ -6,6 +6,8 @@ from tasks.models import DescriptionTask, DescriptionQuestion
 
 def completed(request):
     completion_code = request.session.get('completion_code', None)
+    if completion_code:
+        del request.session['completion_code']
     return render_to_response('tasks/completed.html', {
         'completion_code': completion_code,
     })
