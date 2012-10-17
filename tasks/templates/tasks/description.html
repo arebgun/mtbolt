@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} :: description{% endblock %}
+{% block content %}
+<h1>description task</h1>
+<p>instructions: write something in the textfields</p>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="hidden"
+           name="num_questions"
+           id="num_questions"
+           value="{{ entities|length }}" />
+    {% for e in entities %}
+    <hr />
+    <h2>{{ e.scene.name }}</h2>
+    <img src="{{ e.scene.image.url }}">
+    <input type="hidden"
+           name="q{{ forloop.counter }}_eid"
+           id="q{{ forloop.counter }}_eid"
+           value="{{ e.pk }}" />
+    <label for="q{{ forloop.counter }}_ans">{{ e.name }} is </label>
+    <input type="text"
+           name="q{{ forloop.counter }}_ans"
+           id="q{{ forloop.counter }}_ans"
+           size="100"
+           maxlength="200" />
+    {% endfor %}
+    <hr /><br />
+    <input type="submit" value="submit" />
+</form>
+{% endblock %}

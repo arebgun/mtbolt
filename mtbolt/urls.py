@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'scenes/', include('scenes.urls')),
+    url(r'tasks/', include('tasks.urls')),
 )
 
 if settings.DEBUG:
