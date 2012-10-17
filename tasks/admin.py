@@ -2,7 +2,7 @@ from django.contrib import admin
 from tasks.models import DescriptionTask, DescriptionQuestion
 
 class DescriptionTaskAdmin(admin.ModelAdmin):
-    search_fields = ('cofirmation_code',)
+    search_fields = ('completion_code',)
     list_filter = ('created', 'modified')
 
 class DescriptionQuestionAdmin(admin.ModelAdmin):
