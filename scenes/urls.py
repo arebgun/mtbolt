@@ -8,5 +8,4 @@ urlpatterns = patterns('scenes.views',
             model=Scene,
             template_name='scenes/scene_details.html'),
         name='scene_details'),
-    url(r'^ftq/$', 'freetext_question'),
 )
