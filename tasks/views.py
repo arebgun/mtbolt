@@ -25,12 +25,16 @@ def description(request):
             q = DescriptionQuestion(scene=e.scene, entity=e, answer=ans)
             questions.append(q)
         task = DescriptionTask()
+        # save task to get task.id
         task.save()
         task.questions = questions
+        # save again including answers
         task.save()
         request.session['completion_code'] = task.completion_code
         return redirect('task_completed')
     else:
+        # get some random entities
+        # NOTE this is very inefficient, but its the easiest way to do it
         entities = Entity.objects.order_by('?')[:settings.BOLT_QUESTIONS_PER_TASK]
     return render_to_response('tasks/description.html',
                               {'entities': entities},
