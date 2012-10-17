@@ -5,6 +5,8 @@ class EntityInline(admin.TabularInline):
     model = Entity
 
 class SceneAdmin(admin.ModelAdmin):
-    inlines = [EntityInline]
+    inlines = (EntityInline,)
+    search_fields = ('name',)
+    list_filter = ('created', 'modified')
 
 admin.site.register(Scene, SceneAdmin)
