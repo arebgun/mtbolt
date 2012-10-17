@@ -157,3 +157,7 @@ LOGGING = {
         },
     }
 }
+
+##### BOLT SETTINGS #####
+
+BOLT_QUESTIONS_PER_TASK = 5
