@@ -20,7 +20,7 @@ def description(request):
             ans = request.POST['q%d_ans'%i]
             e = Entity.objects.get(pk=eid)
             entities.append(e)
-            q = DescriptionQuestion(entity=e, answer=ans)
+            q = DescriptionQuestion(scene=e.scene, entity=e, answer=ans)
             questions.append(q)
         task = DescriptionTask()
         task.save()

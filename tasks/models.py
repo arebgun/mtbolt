@@ -12,7 +12,7 @@ class DescriptionTask(CommonInfo):
 
 class DescriptionQuestion(CommonInfo):
     task = models.ForeignKey(DescriptionTask, related_name='questions')
-    # scene = models.ForeignKey('scenes.Scene')
+    scene = models.ForeignKey('scenes.Scene')
     entity = models.ForeignKey('scenes.Entity')
     answer = models.CharField(max_length=200)
 
