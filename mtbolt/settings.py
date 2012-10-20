@@ -1,3 +1,4 @@
+from passwords import username, password
 # Django settings for mtbolt project.
 
 def abspath(*args):
@@ -17,8 +18,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': abspath('mtbolt.db'),                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -159,9 +160,11 @@ LOGGING = {
     }
 }
 
+##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (username, password))
+
 ##### BOLT SETTINGS #####
 
 BOLT_QUESTIONS_PER_TASK = 5
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
