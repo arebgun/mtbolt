@@ -162,3 +162,6 @@ LOGGING = {
 ##### BOLT SETTINGS #####
 
 BOLT_QUESTIONS_PER_TASK = 5
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
