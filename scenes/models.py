@@ -13,7 +13,7 @@ class Scene(CommonInfo):
     image = models.ImageField(upload_to=get_image_path)
 
     def __unicode__(self):
-        return '%s' % self.name
+        return self.name
 
     @models.permalink
     def get_absolute_url(self):
