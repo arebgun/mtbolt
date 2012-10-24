@@ -1,5 +1,4 @@
-from passwords import username, password
-from passwords import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME
+import os
 # Django settings for mtbolt project.
 
 def abspath(*args):
@@ -164,12 +163,18 @@ LOGGING = {
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
-STATIC_URL = '//s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'mtbolt'
+STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+PG_USER = os.environ.get('PS_USER')
+PG_PASSWORD = os.environ.get('PS_PASSWORD')
 
 ##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (username, password))
+DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (PG_USER, PG_PASSWORD))
 
 ##### BOLT SETTINGS #####
 
