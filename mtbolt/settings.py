@@ -169,8 +169,8 @@ AWS_STORAGE_BUCKET_NAME = 'mtbolt'
 STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-PG_USER = os.environ.get('PS_USER')
-PG_PASSWORD = os.environ.get('PS_PASSWORD')
+PG_USER = os.environ.get('PG_USER')
+PG_PASSWORD = os.environ.get('PG_PASSWORD')
 
 ##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
 import dj_database_url
