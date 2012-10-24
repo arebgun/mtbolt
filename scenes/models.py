@@ -1,12 +1,19 @@
+import os
+import uuid
 from django.db import models
 from mtbolt.models import CommonInfo
 
+def get_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return os.path.join('scenes', filename)
+
 class Scene(CommonInfo):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='scenes')
+    image = models.ImageField(upload_to=get_image_path)
 
     def __unicode__(self):
-        return self.name
+        return '%s' % self.name
 
     @models.permalink
     def get_absolute_url(self):
