@@ -1,0 +1,14 @@
+{% extends "admin/change_form.html" %}
+{% block content %}
+{{ block.super }}
+
+<h1>Answers:</h1>
+{% for q in original.questions.all %}
+<hr>
+<img src="{{ q.scene.image.url }}">
+<br>
+<h2>{{ q.entity.name }} is {{ q.answer }}</h2>
+<hr>
+{% endfor %}
+
+{% endblock %}
