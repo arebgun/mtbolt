@@ -1,6 +1,9 @@
 import os
 # Django settings for mtbolt project.
 
+PRODUCTION=os.environ.get('PRODUCTION', None)
+    
+
 def abspath(*args):
     """get an absolute path relative to the project's root"""
     import os
@@ -17,15 +20,37 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    # this will be overridden depending on value of PRODUCTION
+    'default': { 
     }
 }
+
+if not PRODUCTION:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': abspath('mtbolt.db'),                      # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
+else: # production
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'mtbolt'
+    STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+    PG_USER = os.environ.get('PG_USER')
+    PG_PASSWORD = os.environ.get('PG_PASSWORD')
+
+##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (PG_USER, PG_PASSWORD))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -160,21 +185,6 @@ LOGGING = {
         },
     }
 }
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'mtbolt'
-STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
-PG_USER = os.environ.get('PG_USER')
-PG_PASSWORD = os.environ.get('PG_PASSWORD')
-
-##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (PG_USER, PG_PASSWORD))
 
 ##### BOLT SETTINGS #####
 
