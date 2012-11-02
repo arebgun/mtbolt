@@ -6,6 +6,7 @@ class DescriptionTask(CommonInfo):
     completion_code = models.CharField(max_length=32,
                                        unique=True,
                                        default=lambda:uuid.uuid4().hex)
+    approved = models.NullBooleanField()
 
     def __unicode__(self):
         return self.completion_code

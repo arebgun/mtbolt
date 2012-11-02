@@ -2,8 +2,11 @@ from django.contrib import admin
 from tasks.models import DescriptionTask, DescriptionQuestion
 
 class DescriptionTaskAdmin(admin.ModelAdmin):
+    fields = ('completion_code', 'approved')
+    readonly_fields = ('completion_code',)
     search_fields = ('completion_code',)
-    list_filter = ('created', 'modified')
+    list_display = ('completion_code', 'approved')
+    list_filter = ('approved', 'created', 'modified')
 
 class DescriptionQuestionAdmin(admin.ModelAdmin):
     search_fields = ('answer',)
