@@ -1,31 +1,16 @@
 import os
 # Django settings for mtbolt project.
 
-PRODUCTION=os.environ.get('PRODUCTION', None)
-    
-
 def abspath(*args):
     """get an absolute path relative to the project's root"""
     import os
     currpath = os.path.dirname(__file__)
     return os.path.abspath(os.path.join(currpath, '..', *args))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    # this will be overridden depending on value of PRODUCTION
-    'default': { 
-    }
-}
-
+PRODUCTION=os.environ.get('PRODUCTION', None)
+    
 if not PRODUCTION:
+    DEBUG = True
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -37,6 +22,7 @@ if not PRODUCTION:
         }
     }
 else: # production
+    DEBUG = False
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -51,6 +37,20 @@ else: # production
 ##### Add postgres url. default is for local database, dj_database_url will find right url on Heroku ######
     import dj_database_url
     DATABASES['default'] = dj_database_url.config(default='postgres://%s:%s@localhost:5432/mtbolt' % (PG_USER, PG_PASSWORD))
+
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    # this will be overridden depending on value of PRODUCTION
+    'default': { 
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
