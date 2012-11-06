@@ -14,7 +14,7 @@ class DescriptionTask(CommonInfo):
 class DescriptionQuestion(CommonInfo):
     task = models.ForeignKey(DescriptionTask, related_name='questions')
     scene = models.ForeignKey('scenes.Scene')
-    entity = models.ForeignKey('scenes.Entity')
+    entity = models.ForeignKey('scenes.Entity', related_name='descriptions')
     answer = models.CharField(max_length=200)
 
     def __unicode__(self):

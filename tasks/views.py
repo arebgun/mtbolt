@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.conf import settings
+from django.db.models import Count
 from scenes.models import Entity
 from tasks.models import DescriptionTask, DescriptionQuestion
 
@@ -35,7 +36,8 @@ def description(request):
     else:
         # get some random entities
         # NOTE this is very inefficient, but its the easiest way to do it
-        entities = Entity.objects.order_by('?')[:settings.BOLT_QUESTIONS_PER_TASK]
+        entities = Entity.objects.annotate(ans_count=Count('descriptions'))\
+                .order_by('ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
     return render_to_response('tasks/description.html',
                               {'entities': entities},
                               context_instance=RequestContext(request))

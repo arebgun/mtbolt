@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.core.files import ImageFile
+from django.core.files.images import ImageFile
 from scenes.models import Scene, Entity
 import json
 from os.path import basename
