@@ -5,12 +5,12 @@ import json
 from os.path import basename
 
 class Command(BaseCommand):
-    args = "stuff"
+    args = "<scene_name> <image_path> <json_schematic_path>"
     help = "help!"
 
     def handle(self, *args, **options):
         scene_name, image_path, json_path = args
-        self.stdout.write("Creating scene %s from image %s and json schematic %s" % (scene_name, image_path, json_path))
+        self.stdout.write("Creating scene %s from image %s and json schematic %s\n" % (scene_name, image_path, json_path))
 
         scene = Scene(name=scene_name)
         with open(image_path) as f:
@@ -21,6 +21,6 @@ class Command(BaseCommand):
             json_data = json.load(f)
             for entity_desc in json_data:
                 entity_name = entity_desc['name']
-                self.stdout.write("\tCreating entity %s" % entity_name)
+                self.stdout.write("\tCreating entity %s\n" % entity_name)
                 entity = Entity(name=entity_name, scene=scene)
                 entity.save()
