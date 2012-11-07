@@ -23,14 +23,16 @@
            value="{{ entities|length }}" />
     {% for e in entities %}
     <hr />
+    <!--
     <h2>{{ e.scene.name }}</h2>
+    -->
     <img src="{{ e.scene.image.url }}">
     <input type="hidden"
            name="q{{ forloop.counter }}_eid"
            id="q{{ forloop.counter }}_eid"
            value="{{ e.pk }}" />
     <br/>
-    <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }}:</label>
+    <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }} in the scene above:</label>
     <br/>
     <input type="text"
            name="q{{ forloop.counter }}_ans"
