@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} :: description{% endblock %}
 {% block content %}
-<h1>description task</h1>
+<h1>Describing Object Positions</h1>
 <h3>Instructions</h3>
 <ul>
-    <li>A sequence of pictures will be displayed</li>
-    <li>Each picture contains a collection of objects on a table</li>
-    <li>Each object has a number on top of it</li>
+    <li>A sequence of pictures will be displayed.</li>
+    <li>Each picture contains a collection of objects on a table.</li>
+    <li>Each object is labelled with a number.</li>
+</ul>
+<ul>
     <li>You will be asked to describe the position of one of the objects</li>
-    <li>You can use the othe objects as reference</li>
-    <li>You can also use the different parts of the table (side, corner, etc.)</li>
-    <li>You cannot use the object number</li>
+    <li>You can use the other objects as reference</li>
+    <li>You can also use the different parts of the table (side, corners, etc.)</li>
+    <li>Do not use any of the object numbers in your description: describe objects using words.</li>
     <li>Have fun!</li>
 </ul>
 <form action="." method="post">
@@ -27,7 +29,9 @@
            name="q{{ forloop.counter }}_eid"
            id="q{{ forloop.counter }}_eid"
            value="{{ e.pk }}" />
-    <label for="q{{ forloop.counter }}_ans">Describe object {{ e.name }}:</label>
+    <br/>
+    <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }}:</label>
+    <br/>
     <input type="text"
            name="q{{ forloop.counter }}_ans"
            id="q{{ forloop.counter }}_ans"

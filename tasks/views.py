@@ -39,8 +39,7 @@ def description(request):
         # have a lesser chance of working on the same entities
         # NOTE this is very inefficient, but its the easiest way to do it
         entities = Entity.objects.annotate(ans_count=Count('descriptions'))\
-                .order_by('?')\
-                .order_by('ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
+                .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
     return render_to_response('tasks/description.html',
                               {'entities': entities},
                               context_instance=RequestContext(request))
