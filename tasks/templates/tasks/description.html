@@ -1,5 +1,32 @@
 {% extends "base.html" %}
+
 {% block title %}{{ block.super }} :: description{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+    $(document).ready(function () {
+        $('form').submit(function () {
+            $('.error').remove();
+
+            $('.answer').each(function () {
+                if (/^\s*$/.test(this.value)) {
+                    $(this).after('<div class="error">this field is required</div>');
+                }
+                if (/\d/.test(this.value)) {
+                    $(this).after('<div class="error">no digits allowed</div>');
+                }
+            });
+
+            if ($('.error').length > 0) {
+                alert('please answer all questions correctly');
+                return false;
+            }
+        });
+    });
+</script>
+{% endblock %}
+
 {% block content %}
 <h1>description task</h1>
 <h3>Instructions</h3>
@@ -30,6 +57,7 @@
     <label for="q{{ forloop.counter }}_ans">Describe object {{ e.name }}:</label>
     <input type="text"
            name="q{{ forloop.counter }}_ans"
+           class="answer"
            id="q{{ forloop.counter }}_ans"
            size="100"
            maxlength="200" />
