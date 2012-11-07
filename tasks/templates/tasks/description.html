@@ -2,7 +2,17 @@
 {% block title %}{{ block.super }} :: description{% endblock %}
 {% block content %}
 <h1>description task</h1>
-<p>instructions: write something in the textfields</p>
+<h3>Instructions</h3>
+<ul>
+    <li>A sequence of pictures will be displayed</li>
+    <li>Each picture contains a collection of objects on a table</li>
+    <li>Each object has a number on top of it</li>
+    <li>You will be asked to describe the position of one of the objects</li>
+    <li>You can use the othe objects as reference</li>
+    <li>You can also use the different parts of the table (side, corner, etc.)</li>
+    <li>You cannot use the object number</li>
+    <li>Have fun!</li>
+</ul>
 <form action="." method="post">
     {% csrf_token %}
     <input type="hidden"
@@ -17,7 +27,7 @@
            name="q{{ forloop.counter }}_eid"
            id="q{{ forloop.counter }}_eid"
            value="{{ e.pk }}" />
-    <label for="q{{ forloop.counter }}_ans">{{ e.name }} is </label>
+    <label for="q{{ forloop.counter }}_ans">Describe object {{ e.name }}:</label>
     <input type="text"
            name="q{{ forloop.counter }}_ans"
            id="q{{ forloop.counter }}_ans"
