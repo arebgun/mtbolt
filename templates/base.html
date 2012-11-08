@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,9 @@
             {% endfor %}
         </ul>
     {% endif %}
+    {% block scripts %}
+        <script type="text/javascript" src="{% static "jquery.min.js" %}"></script>
+    {% endblock scripts %}
     <div id="content">
         {% block content %}{% endblock %}
     </div>
