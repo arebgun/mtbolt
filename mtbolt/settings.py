@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'scenes',
     'tasks',
     'storages',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
