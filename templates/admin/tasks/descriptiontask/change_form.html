@@ -7,7 +7,11 @@
 <hr>
 <img src="{{ q.scene.image.url }}">
 <br>
+{% if q.answer %}
+<h2>{{ q.entity.name }}: "{{ q.answer }}" </h2>
+{% else %}
 <h2>{{ q.entity.name }}: "{{ q.object_description }}" is "{{ q.location_description}}" </h2>
+{% endif %}
 <hr>
 {% endfor %}
 
