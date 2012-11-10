@@ -1,5 +1,6 @@
 *.pyc
 mtbolt.db
+pulled.db
 media/
 venv
 passwords.py

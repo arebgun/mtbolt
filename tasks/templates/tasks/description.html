@@ -59,12 +59,27 @@
            id="q{{ forloop.counter }}_eid"
            value="{{ e.pk }}" />
     <br/>
+    <!--
+    Describe object N:
+    Object N is ______XX________
+    Describe the location of object N:
+    XX is ____________
+    -->
+    <label for="q{{ forloop.counter }}_ans">Describe object {{ e.name }} in the scene above:</label>
+    <br/>
+    <input type="text"
+           name="q{{ forloop.counter }}_obj"
+           class="object_description"
+           id="q{{ forloop.counter }}_obj"
+           size="100"
+           maxlength="200" />
+    <br/>
     <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }} in the scene above:</label>
     <br/>
     <input type="text"
-           name="q{{ forloop.counter }}_ans"
-           class="answer"
-           id="q{{ forloop.counter }}_ans"
+           name="q{{ forloop.counter }}_loc"
+           class="location_description"
+           id="q{{ forloop.counter }}_loc"
            size="100"
            maxlength="200" />
     {% endfor %}

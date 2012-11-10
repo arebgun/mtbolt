@@ -9,8 +9,8 @@ class DescriptionTaskAdmin(admin.ModelAdmin):
     list_filter = ('approved', 'created', 'modified')
 
 class DescriptionQuestionAdmin(admin.ModelAdmin):
-    search_fields = ('answer',)
-    list_filter = ('created', 'modified')
+    list_display = ('scene', 'entity', 'object_description', 'location_description', 'answer',)
+    list_filter = ('created', 'modified', 'scene', 'task')
 
 admin.site.register(DescriptionTask, DescriptionTaskAdmin)
 admin.site.register(DescriptionQuestion, DescriptionQuestionAdmin)

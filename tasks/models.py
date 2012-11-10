@@ -17,5 +17,8 @@ class DescriptionQuestion(CommonInfo):
     entity = models.ForeignKey('scenes.Entity', related_name='descriptions')
     answer = models.CharField(max_length=200)
 
+    object_description = models.CharField(max_length=200)
+    location_description = models.CharField(max_length=200)
+
     def __unicode__(self):
-        return self.answer
+        return "%s %s %s" % (self.answer, self.object_description, self.location_description)

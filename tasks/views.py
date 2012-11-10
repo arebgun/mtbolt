@@ -20,10 +20,12 @@ def description(request):
         num_questions = int(request.POST['num_questions'])
         for i in xrange(1, num_questions+1):
             eid = request.POST['q%d_eid'%i]
-            ans = request.POST['q%d_ans'%i]
+            # ans = request.POST['q%d_ans'%i]
+            object_description = request.POST['q%d_obj'%i]
+            location_description = request.POST['q%d_loc'%i]
             e = Entity.objects.get(pk=eid)
             entities.append(e)
-            q = DescriptionQuestion(scene=e.scene, entity=e, answer=ans)
+            q = DescriptionQuestion(scene=e.scene, entity=e, object_description=object_description, location_description=location_description)
             questions.append(q)
         task = DescriptionTask()
         # save task to get task.id
