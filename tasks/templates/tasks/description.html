@@ -4,27 +4,8 @@
 
 {% block js %}
 {{ block.super }}
-<script>
-    $(document).ready(function () {
-        $('form').submit(function () {
-            $('.error').remove();
-
-            $('.answer').each(function () {
-                if (/^\s*$/.test(this.value)) {
-                    $(this).after('<div class="error">This field is required.</div>');
-                }
-                if (/\d/.test(this.value)) {
-                    $(this).after('<div class="error">No digits allowed. Do not use object numbers to refer to objects.</div>');
-                }
-            });
-
-            if ($('.error').length > 0) {
-                alert('Please answer all questions correctly.');
-                return false;
-            }
-        });
-    });
-</script>
+    {% load staticfiles %}
+    <script src="{% static "js/description.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -76,6 +57,10 @@
     <br/>
     <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }} in the scene above:</label>
     <br/>
+    <label class="object_label"
+        id="q{{ forloop.counter }}_obj_lbl">
+        asdf
+    </label>
     <input type="text"
            name="q{{ forloop.counter }}_loc"
            class="location_description"
