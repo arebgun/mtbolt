@@ -9,14 +9,19 @@
 {% endblock %}
 
 {% block content %}
+<style type="text/css">
+    .instruction {
+        font-size: 130%
+    }
+</style>
 <h1>Describing Object Positions</h1>
 <h3>Instructions</h3>
-<ul>
+<ul class="instruction">
     <li>A sequence of pictures will be displayed.</li>
     <li>Each picture contains a collection of objects on a table.</li>
     <li>Each object is labelled with a number.</li>
 </ul>
-<ul>
+<ul class="instruction">
     <li>You will be asked to describe the position of one of the objects</li>
     <li>You can use the other objects as reference</li>
     <li>You can also use the different parts of the table (side, corners, etc.)</li>
@@ -46,7 +51,12 @@
     Describe the location of object N:
     XX is ____________
     -->
-    <label for="q{{ forloop.counter }}_ans">Describe object {{ e.name }} in the scene above:</label>
+    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe object {{ e.name }} in the scene above:</label>
+    <br/>
+    <label class="description_label"
+        id="q{{ forloop.counter }}_obj_lbl">
+        Object {{ e.name}} is
+    </label>
     <br/>
     <input type="text"
            name="q{{ forloop.counter }}_obj"
@@ -55,12 +65,14 @@
            size="100"
            maxlength="200" />
     <br/>
-    <label for="q{{ forloop.counter }}_ans">Describe the position of object {{ e.name }} in the scene above:</label>
+    <br/>
+    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe the position of object {{ e.name }} in the scene above:</label>
     <br/>
     <label class="object_label"
-        id="q{{ forloop.counter }}_obj_lbl">
-        asdf
+        id="q{{ forloop.counter }}_dsc_lbl">
+        is
     </label>
+    <br/>
     <input type="text"
            name="q{{ forloop.counter }}_loc"
            class="location_description"

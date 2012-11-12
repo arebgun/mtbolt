@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    /*
-    $('.object_description').change(function() {
-        target_id = this.id + '_lbl'
-        $('#'+target_id).text(this.value)
-    });
-    */
+
+    copy_desc = function() {
+        target_id = $(this).attr('id').split('_')[0] + '_dsc_lbl'
+        $('#'+target_id).text(this.value + ' is')
+    };
+
+    $('.object_description').change(copy_desc).blur(copy_desc).keyup(copy_desc);
 
     $('form').submit(function () {
         $('.error').remove();
