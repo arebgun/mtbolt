@@ -57,12 +57,11 @@
         id="q{{ forloop.counter }}_obj_lbl">
         Object {{ e.name}} is
     </label>
-    <br/>
     <input type="text"
            name="q{{ forloop.counter }}_obj"
            class="object_description"
            id="q{{ forloop.counter }}_obj"
-           size="100"
+           size="50"
            maxlength="200" />
     <br/>
     <br/>
@@ -72,12 +71,11 @@
         id="q{{ forloop.counter }}_dsc_lbl">
         is
     </label>
-    <br/>
     <input type="text"
            name="q{{ forloop.counter }}_loc"
            class="location_description"
            id="q{{ forloop.counter }}_loc"
-           size="100"
+           size="50"
            maxlength="200" />
     {% endfor %}
     <hr /><br />
