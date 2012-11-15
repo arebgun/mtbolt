@@ -1,0 +1,6 @@
+show location_description, and scene. Have user select which object is the best match
+
+ideas for validation: 
+    - show an easy scene and sentence
+    - show the same scene twice, make sure their answers agree
+    - script to flag users who don't agree with most others
