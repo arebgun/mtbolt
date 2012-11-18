@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tasks.models import DescriptionTask, DescriptionQuestion
+from object_tasks.models import DescriptionTask, EntityBinding
 
 def approve(modeladmin, request, queryset):
     queryset.update(approved=True)
@@ -17,9 +17,9 @@ class DescriptionTaskAdmin(admin.ModelAdmin):
     list_filter = ('approved', 'created', 'modified')
     actions = [approve, reject]
 
-class DescriptionQuestionAdmin(admin.ModelAdmin):
-    list_display = ('scene', 'entity', 'object_description', 'location_description', 'answer',)
+class EntityBindingAdmin(admin.ModelAdmin):
+    list_display = ('scene', 'entity', 'description', 'binding',)
     list_filter = ('created', 'modified', 'scene', 'task')
 
 admin.site.register(DescriptionTask, DescriptionTaskAdmin)
-admin.site.register(DescriptionQuestion, DescriptionQuestionAdmin)
+admin.site.register(EntityBinding, EntityBindingAdmin)
