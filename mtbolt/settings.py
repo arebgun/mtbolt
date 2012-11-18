@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'scenes',
     'tasks',
+    'object_tasks',
     'storages',
     'south',
 )

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 
     url(r'scenes/', include('scenes.urls')),
     url(r'tasks/', include('tasks.urls')),
+    url(r'object_tasks/', include('object_tasks.urls')),
 )
 
 if settings.DEBUG:

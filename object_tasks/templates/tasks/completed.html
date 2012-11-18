@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} :: task complete{% endblock %}
+{% block content %}
+<h1>You completed your task!</h1>
+<h2>completion code: {{ completion_code }}</h2>
+{% endblock %}
