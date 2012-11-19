@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+{% load object_task_extras %}
+
 {% block title %}{{ block.super }} :: description{% endblock %}
 
 {% block js %}
 {{ block.super }}
     {% load staticfiles %}
-    <script src="{% static "js/description.js" %}"></script>
+    <script src="{% static "js/object_description.js" %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -34,6 +36,12 @@
            id="num_questions"
            value="{{ descriptions|length }}" />
     {% for d in descriptions %}
+        <select>
+            <option>Select an object</option>
+            {% for e in d|description_entities %}
+                <option> {{ e.name }}</option>
+            {% endfor %}
+        </select>
         <p> {{ d.object_description }} </p>
         <p> {{ d.location_description }} </p>
         <p> {{ d.answer }} </p>
