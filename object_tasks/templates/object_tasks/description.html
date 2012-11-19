@@ -15,8 +15,11 @@
     .instruction {
         font-size: 130%
     }
+    .sentence {
+        font-size: 120%
+    }
 </style>
-<h1>Describing Object Positions</h1>
+<h1>Object Locations</h1>
 <h3>Instructions</h3>
 <ul class="instruction">
     <li>A sequence of pictures will be displayed.</li>
@@ -36,16 +39,18 @@
            id="num_questions"
            value="{{ descriptions|length }}" />
     {% for d in descriptions %}
+        <hr />
+        <img src={{ d.scene.image.url }}>  </img>
+        </br>
+        <label class="instruction">Which object in the picture above is best described by the following sentence?</label>
+        </br>
+        <p class="sentence"> {{ d.location_description }} </p>
         <select>
             <option>Select an object</option>
             {% for e in d|description_entities %}
                 <option> {{ e.name }}</option>
             {% endfor %}
         </select>
-        <p> {{ d.object_description }} </p>
-        <p> {{ d.location_description }} </p>
-        <p> {{ d.answer }} </p>
-        <p> {{ d.scene.image.url }} </p>
     {% endfor %}
     <hr /><br />
     <input type="submit" value="submit" />
