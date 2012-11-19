@@ -18,8 +18,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'scenes/', include('scenes.urls')),
-    url(r'tasks/', include('tasks.urls')),
+    # object tasks has to come first, because I'm bad at naming apps, and tasks also matches object_tasks
     url(r'object_tasks/', include('object_tasks.urls')),
+    url(r'tasks/', include('tasks.urls')),
 )
 
 if settings.DEBUG:

@@ -12,11 +12,12 @@ class DescriptionTask(CommonInfo):
         return self.completion_code
 
 class EntityBinding(CommonInfo):
+    # the object_tasks.DescriptionTask that contains this response
     task = models.ForeignKey(DescriptionTask, related_name='entity_bindings')
-    scene = models.ForeignKey('scenes.Scene', related_name='entity_bindings')
-    entity = models.ForeignKey('scenes.Entity', related_name='bindings')
+    # the response from the first experiment, which is shown to the user for proofing
     description = models.ForeignKey('tasks.DescriptionQuestion')
 
+    # an integer representing the object the user selects as described by description
     binding = models.IntegerField()
 
     def __unicode__(self):

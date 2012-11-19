@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('completion_code', self.gf('django.db.models.fields.CharField')(default='e5b32492aefc4dc99b5397135123e715', unique=True, max_length=32)),
+            ('completion_code', self.gf('django.db.models.fields.CharField')(default='8beca6411be24ffd9cea399602a0208b', unique=True, max_length=32)),
             ('approved', self.gf('django.db.models.fields.NullBooleanField')(null=True, blank=True)),
         ))
         db.send_create_signal('object_tasks', ['DescriptionTask'])
@@ -24,8 +24,6 @@ class Migration(SchemaMigration):
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('task', self.gf('django.db.models.fields.related.ForeignKey')(related_name='entity_bindings', to=orm['object_tasks.DescriptionTask'])),
-            ('scene', self.gf('django.db.models.fields.related.ForeignKey')(related_name='entity_bindings', to=orm['scenes.Scene'])),
-            ('entity', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bindings', to=orm['scenes.Entity'])),
             ('description', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tasks.DescriptionQuestion'])),
             ('binding', self.gf('django.db.models.fields.IntegerField')()),
         ))
@@ -44,7 +42,7 @@ class Migration(SchemaMigration):
         'object_tasks.descriptiontask': {
             'Meta': {'object_name': 'DescriptionTask'},
             'approved': ('django.db.models.fields.NullBooleanField', [], {'null': 'True', 'blank': 'True'}),
-            'completion_code': ('django.db.models.fields.CharField', [], {'default': "'a83fbdc3204f4941b7cae15ce406dff1'", 'unique': 'True', 'max_length': '32'}),
+            'completion_code': ('django.db.models.fields.CharField', [], {'default': "'3b216c7e0ac04fb3b4fdd1c29cdaa4fb'", 'unique': 'True', 'max_length': '32'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
@@ -54,10 +52,8 @@ class Migration(SchemaMigration):
             'binding': ('django.db.models.fields.IntegerField', [], {}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tasks.DescriptionQuestion']"}),
-            'entity': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bindings'", 'to': "orm['scenes.Entity']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'scene': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'entity_bindings'", 'to': "orm['scenes.Scene']"}),
             'task': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'entity_bindings'", 'to': "orm['object_tasks.DescriptionTask']"})
         },
         'scenes.entity': {
@@ -91,7 +87,7 @@ class Migration(SchemaMigration):
         'tasks.descriptiontask': {
             'Meta': {'object_name': 'DescriptionTask'},
             'approved': ('django.db.models.fields.NullBooleanField', [], {'null': 'True', 'blank': 'True'}),
-            'completion_code': ('django.db.models.fields.CharField', [], {'default': "'f2c42e6ce3254eb1bad0d348b167e172'", 'unique': 'True', 'max_length': '32'}),
+            'completion_code': ('django.db.models.fields.CharField', [], {'default': "'437e60d1dc8745cc945e18eb382e4575'", 'unique': 'True', 'max_length': '32'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})

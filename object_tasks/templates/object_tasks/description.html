@@ -22,67 +22,10 @@
     <li>Each object is labelled with a number.</li>
 </ul>
 <ul class="instruction">
-    <li>We will ask you about one of the objects.</li>
-    <li>First, you will be asked to describe the object itself.</li>
-    <li>Then, you will be asked to describe the object's location.</li>
-    <ul>
-        <li>You can use the other objects as reference</li>
-        <li>You can also use the different parts of the table (side, corners, etc.)</li>
-    </ul>
-    <li>Do not use any of the object numbers in your description: describe objects using words.</li>
-    <li>Have fun!</li>
+    <li>We will show you a sentence meant to describe an object in the scene.</li>
+    <li>You will select the number of the object described by the sentence</li>
+    <li>If there are multiple objects that could be described by the sentence, choose the best one.</li>
 </ul>
 <form action="." method="post">
-    {% csrf_token %}
-    <input type="hidden"
-           name="num_questions"
-           id="num_questions"
-           value="{{ entities|length }}" />
-    {% for e in entities %}
-    <hr />
-    <!--
-    <h2>{{ e.scene.name }}</h2>
-    -->
-    <img src="{{ e.scene.image.url }}">
-    <input type="hidden"
-           name="q{{ forloop.counter }}_eid"
-           id="q{{ forloop.counter }}_eid"
-           value="{{ e.pk }}" />
-    <br/>
-    <!--
-    Describe object N:
-    Object N is ______XX________
-    Describe the location of object N:
-    XX is ____________
-    -->
-    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe object {{ e.name }} in the scene above:</label>
-    <br/>
-    <label class="description_label"
-        id="q{{ forloop.counter }}_obj_lbl">
-        Object {{ e.name}} is
-    </label>
-    <input type="text"
-           name="q{{ forloop.counter }}_obj"
-           class="object_description"
-           id="q{{ forloop.counter }}_obj"
-           size="50"
-           maxlength="200" />
-    <br/>
-    <br/>
-    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe the position of object {{ e.name }} in the scene above:</label>
-    <br/>
-    <label class="object_label"
-        id="q{{ forloop.counter }}_dsc_lbl">
-        is
-    </label>
-    <input type="text"
-           name="q{{ forloop.counter }}_loc"
-           class="location_description"
-           id="q{{ forloop.counter }}_loc"
-           size="50"
-           maxlength="200" />
-    {% endfor %}
-    <hr /><br />
-    <input type="submit" value="submit" />
 </form>
 {% endblock %}
