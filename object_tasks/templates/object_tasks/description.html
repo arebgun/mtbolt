@@ -28,4 +28,17 @@
 </ul>
 <form action="." method="post">
 </form>
+    {% csrf_token %}
+    <input type="hidden"
+           name="num_questions"
+           id="num_questions"
+           value="{{ descriptions|length }}" />
+    {% for d in descriptions %}
+        <p> {{ d.object_description }} </p>
+        <p> {{ d.location_description }} </p>
+        <p> {{ d.answer }} </p>
+        <p> {{ d.scene.image.url }} </p>
+    {% endfor %}
+    <hr /><br />
+    <input type="submit" value="submit" />
 {% endblock %}

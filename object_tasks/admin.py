@@ -1,5 +1,5 @@
 from django.contrib import admin
-from object_tasks.models import DescriptionTask, EntityBinding
+from object_tasks.models import ObjectDescriptionTask, EntityBinding
 
 def approve(modeladmin, request, queryset):
     queryset.update(approved=True)
@@ -9,7 +9,7 @@ def reject(modeladmin, request, queryset):
     queryset.update(approved=False)
 reject.short_description = 'Reject selected decription tasks'
 
-class DescriptionTaskAdmin(admin.ModelAdmin):
+class ObjectDescriptionTaskAdmin(admin.ModelAdmin):
     fields = ('completion_code', 'approved')
     readonly_fields = ('completion_code',)
     search_fields = ('completion_code',)
@@ -18,8 +18,8 @@ class DescriptionTaskAdmin(admin.ModelAdmin):
     actions = [approve, reject]
 
 class EntityBindingAdmin(admin.ModelAdmin):
-    list_display = ('scene', 'entity', 'description', 'binding',)
-    list_filter = ('created', 'modified', 'scene', 'task')
+    list_display = ('task', 'description', 'binding',)
+    list_filter = ('created', 'modified', 'task')
 
-admin.site.register(DescriptionTask, DescriptionTaskAdmin)
+admin.site.register(ObjectDescriptionTask, ObjectDescriptionTaskAdmin)
 admin.site.register(EntityBinding, EntityBindingAdmin)
