@@ -32,7 +32,6 @@
     <li>If there are multiple objects that could be described by the sentence, choose the best one.</li>
 </ul>
 <form action="." method="post">
-</form>
     {% csrf_token %}
     <input type="hidden"
            name="num_questions"
@@ -41,11 +40,18 @@
     {% for d in descriptions %}
         <hr />
         <img src={{ d.scene.image.url }}>  </img>
+        <input type="hidden"
+            name="q{{ forloop.counter }}_did"
+            id="q{{ forloop.counter }}_did"
+            value="{{ d.pk }}" />
         </br>
         <label class="instruction">Which object in the picture above is best described by the following sentence?</label>
         </br>
         <p class="sentence"> {{ d.location_description }} </p>
-        <select>
+        <select
+           name="q{{ forloop.counter }}_bin"
+           class="object_binding"
+           id="q{{ forloop.counter }}_bin">
             <option>Select an object</option>
             {% for e in d|description_entities %}
                 <option> {{ e.name }}</option>
@@ -54,4 +60,5 @@
     {% endfor %}
     <hr /><br />
     <input type="submit" value="submit" />
+</form>
 {% endblock %}
