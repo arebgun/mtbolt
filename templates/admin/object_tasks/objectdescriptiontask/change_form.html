@@ -1,0 +1,15 @@
+{% extends "admin/change_form.html" %}
+{% block content %}
+{{ block.super }}
+
+<h1>Answers:</h1>
+{% for b in original.entity_bindings.all %}
+<hr>
+<img src="{{ b.description.scene.image.url }}">
+<br>
+<h2>{{ b.description.location_description }}: "{{ b.binding }}" </h2>
+<h3>Actual object: {{ b.description.entity.name }}</h3>
+<hr>
+{% endfor %}
+
+{% endblock %}
