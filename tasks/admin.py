@@ -27,10 +27,12 @@ class DescriptionTaskAdmin(admin.ModelAdmin):
     actions = [approve, reject]
 
 class DescriptionQuestionAdmin(admin.ModelAdmin):
-    list_display = ('scene', 'entity', 'object_description', 'location_description', 'answer', 'use_in_object_tasks',)
-    list_filter = ('created', 'modified', 'scene', 'task')
+    list_display = ('scene', 'entity', 'object_description', 'location_description', 'answer', 'task_approved', 'use_in_object_tasks',)
+    list_filter = ('created', 'modified', 'scene', 'task__approved', 'use_in_object_tasks')
+    # do not put task_approved in csv because we don't have a way to reference foreign keys yet
+    csv_fields = ('scene', 'entity', 'object_description', 'location_description', 'answer',)
 
-    actions = [use, do_not_use, export_as_csv_action('Export to CSV', fields=list_display)]
+    actions = [use, do_not_use, export_as_csv_action('Export to CSV', fields=csv_fields)]
 
     def task_approved(self, obj):
         return '%s'%(obj.task.approved)
