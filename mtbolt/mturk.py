@@ -15,10 +15,10 @@ def open_connection(access_id=MTURK_ACCESS_KEY_ID, secret_key=MTURK_SECRET_ACCES
                            aws_secret_access_key=secret_key,
                            host=host)
 
-def paginate_all(connection_fn, *params):
+def paginate_all(connection_fn, *args, **params):
     """ call like this: paginate_all(mtc.get_reviewable_hits) """
     page_size=50
-    results = connection_fn(*params, page_size=page_size)
+    results = connection_fn(*args, page_size=page_size, **params)
     total_pages = float(results.TotalNumResults)/page_size
     int_total = int(total_pages)
     if(total_pages - int_total>0):
@@ -28,7 +28,7 @@ def paginate_all(connection_fn, *params):
     pn = 1
     while pn < total_pages:
         pn += 1
-        temp_results = connection_fn(*params, page_size=page_size, page_number=pn)
+        temp_results = connection_fn(*args, page_size=page_size, page_number=pn, **params)
         results.extend(temp_results)
     return results
 
@@ -36,7 +36,7 @@ def get_open_assignments(connection):
     hits = paginate_all(connection.get_reviewable_hits)
     assignments = []
     for hit in hits:
-        hit_assignments = paginate_all(connection.get_assignments, hit.HITId)
+        hit_assignments = paginate_all(connection.get_assignments, hit.HITId, status='Submitted')
         assignments.extend(hit_assignments)
     return assignments
 
