@@ -18,12 +18,13 @@ def sync_turk_tasks():
             description_task = matching_tasks[0]
             if description_task.approved == True:
                 print 'approving %s, %s' % (a, code)
+                connection.approve_assignment(a.AssignmentId)
                 approval_count += 1
             elif description_task.approved == False:
-                print 'would reject %s, %s' % (a, code)
+                print 'rejecting %s, %s' % (a, code)
+                connection.reject_assignment(a.assignmentId)
                 rejection_count += 1
             else:
-                print 'val for %s, %s = %s' % (a, code, description_task.approved)
                 untouched_count += 1
                 # connection.approve_assignment(a)
         else:
@@ -36,7 +37,6 @@ def sync_turk_tasks():
 
 class Command(BaseCommand):
     help = "Approves or rejects active Turk assignments that have been flagged in the database"
-
 
     def handle(self, *args, **options):
         sync_turk_tasks()
