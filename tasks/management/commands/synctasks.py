@@ -15,9 +15,15 @@ class Command(BaseCommand):
                 if len(matching_tasks) > 1:
                     print 'multiple tasks found for %s: %s' % (code, len(matching_tasks))
                 description_task = matching_tasks[0]
-                if description_task == True:
+                if description_task.approved == True:
                     print 'approving %s, %s' % (a, code)
+                elif description_task.approved == False:
+                    print 'would reject %s, %s' % (a, code)
+                else:
+                    print 'val for %s, %s = %s' % (a, code, description_task.approved)
                     # connection.approve_assignment(a)
+            else:
+                print 'no tasks found for %s' % code
 
     def handle(self, *args, **options):
         self.sync_turk_tasks()
