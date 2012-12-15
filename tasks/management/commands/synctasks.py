@@ -22,7 +22,7 @@ def sync_turk_tasks():
                 approval_count += 1
             elif description_task.approved == False:
                 print 'rejecting %s, %s' % (a, code)
-                connection.reject_assignment(a.assignmentId)
+                connection.reject_assignment(a.AssignmentId)
                 rejection_count += 1
             else:
                 untouched_count += 1
