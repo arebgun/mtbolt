@@ -32,6 +32,8 @@ def description(request):
         request.session['completion_code'] = task.completion_code
         return redirect('task_completed')
     else:
+        # get bindings on sentences with fewest bindings, break ties randomly
+        # so if six DescriptionQuestions all have no entity bindings, choose five randomly
         descriptions = DescriptionQuestion.objects.filter(use_in_object_tasks=True)\
                 .annotate(binding_count=Count('entity_bindings'))\
                 .order_by('binding_count', '?')[:settings.BOLT_OBJECT_QUESTIONS_PER_TASK]

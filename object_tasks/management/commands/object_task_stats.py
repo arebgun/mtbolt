@@ -13,7 +13,7 @@ def print_stats():
     correct_per = map(num_correct, obj_desc_tasks)
     print 'average bindings correct per HIT: %f' % (float(sum(correct_per)) / (5 * len(correct_per)))
 
-    sentences = tasks.models.DescriptionQuestion.objects.all()
+    sentences = tasks.models.DescriptionQuestion.objects.filter(use_in_object_tasks=True).all()
     bindings_per_sent = map(lambda sent: sent.entity_bindings.count(), sentences)
     num_proofed = len([n for n in bindings_per_sent if n > 0])
     print 'number of sentences proofed: %d' % num_proofed
@@ -28,7 +28,7 @@ def print_stats():
         print '\t%d sentences have %d bindings' % (count, n)
 
 class Command(BaseCommand):
-    help = "Approves or rejects active Turk assignments that have been flagged in the database"
+    help = "Prints completion stats for object_tasks"
 
     def handle(self, *args, **options):
         print_stats()
