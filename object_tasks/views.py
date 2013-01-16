@@ -34,7 +34,7 @@ def description(request):
     else:
         descriptions = DescriptionQuestion.objects.filter(use_in_object_tasks=True)\
                 .annotate(binding_count=Count('entity_bindings'))\
-                .order_by('?', 'binding_count')[:settings.BOLT_OBJECT_QUESTIONS_PER_TASK]
+                .order_by('binding_count', '?')[:settings.BOLT_OBJECT_QUESTIONS_PER_TASK]
     return render_to_response('object_tasks/description.html',
                               {'descriptions': descriptions},
                               context_instance=RequestContext(request))
