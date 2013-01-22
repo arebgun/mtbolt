@@ -41,5 +41,7 @@ class Command(BaseCommand):
     help = "Prints completion stats for object_tasks"
 
     def handle(self, *args, **options):
+        print 'stats for all sentences'
         print_stats(extra_validation=False)
+        print '\nstats for extra validated sentences'
         print_stats(extra_validation=True)
