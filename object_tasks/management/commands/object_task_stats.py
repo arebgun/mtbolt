@@ -41,6 +41,5 @@ class Command(BaseCommand):
     help = "Prints completion stats for object_tasks"
 
     def handle(self, *args, **options):
-        print descriptions_passing_extra_validation()
         print_stats(extra_validation=False)
         print_stats(extra_validation=True)
