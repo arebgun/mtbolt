@@ -9,6 +9,8 @@ def abspath(*args):
 
 PRODUCTION=os.environ.get('PRODUCTION', None)
 DATABASES = {}
+
+PROJECT_ROOT = abspath('.')
     
 if not PRODUCTION:
     DEBUG = True
