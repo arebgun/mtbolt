@@ -19,7 +19,7 @@ def print_stats(extra_validation=False):
     print 'number of HITs completed: %d' % len(obj_desc_tasks)
 
     correct_per = map(num_correct, obj_desc_tasks)
-    print correct_per
+    print correct_per[:30]
     print sum(correct_per)
     print 'average bindings correct per HIT: %f' % (float(sum(correct_per)) / (5 * len(correct_per)))
 
