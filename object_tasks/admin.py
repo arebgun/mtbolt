@@ -10,7 +10,7 @@ def reject(modeladmin, request, queryset):
 reject.short_description = 'Reject selected decription tasks'
 
 class ObjectDescriptionTaskAdmin(admin.ModelAdmin):
-    fields = ('completion_code', 'approved')
+    fields = ('completion_code', 'approved', 'created')
     readonly_fields = ('completion_code',)
     search_fields = ('completion_code',)
     list_display = ('completion_code', 'approved')
@@ -18,8 +18,8 @@ class ObjectDescriptionTaskAdmin(admin.ModelAdmin):
     actions = [approve, reject]
 
 class EntityBindingAdmin(admin.ModelAdmin):
-    list_display = ('task', 'description', 'binding',)
-    list_filter = ('created', 'modified', 'task')
+    list_display = ('task', 'description', 'binding', 'actual_object_name', 'created')
+    list_filter = ('created', 'modified')
 
 admin.site.register(ObjectDescriptionTask, ObjectDescriptionTaskAdmin)
 admin.site.register(EntityBinding, EntityBindingAdmin)

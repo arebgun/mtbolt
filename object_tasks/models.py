@@ -21,5 +21,8 @@ class EntityBinding(CommonInfo):
     # an integer representing the object the user selects as described by description
     binding = models.IntegerField()
 
+    def actual_object_name(entity_binding):
+        return entity_binding.description.entity.name
+
     def __unicode__(self):
         return "%s %s" % (self.description, self.binding)
