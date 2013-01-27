@@ -10,10 +10,10 @@ def reject(modeladmin, request, queryset):
 reject.short_description = 'Reject selected decription tasks'
 
 class ObjectDescriptionTaskAdmin(admin.ModelAdmin):
-    fields = ('completion_code', 'approved', 'created')
+    fields = ('completion_code', 'approved')
     readonly_fields = ('completion_code',)
     search_fields = ('completion_code',)
-    list_display = ('completion_code', 'approved')
+    list_display = ('completion_code', 'approved', 'created')
     list_filter = ('approved', 'created', 'modified')
     actions = [approve, reject]
 
