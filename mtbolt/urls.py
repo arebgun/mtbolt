@@ -19,8 +19,8 @@ urlpatterns = patterns('',
 
     url(r'scenes/', include('scenes.urls')),
    # object tasks has to come first, because I'm bad at naming apps, and tasks also matches object_tasks
-    # url(r'object_tasks/', include('object_tasks.urls')),
-    url(r'tasks/', include('object_tasks.urls')),
+    url(r'object_tasks/', include('object_tasks.urls')),
+    url(r'tasks/', include('tasks.urls')),
 )
 
 if settings.DEBUG:
