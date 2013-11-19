@@ -35,7 +35,7 @@ class Command(BaseCommand):
             for dl in df:
                 ent_name, text, corpus_size, representation_model = dl.split(';')
                 entity = Entity.objects.get(scene__name=scene_name, name=ent_name)
-                entity.generated_desscriptions.create(text=text.strip(), corpus_size=corpus_size.strip(), representation_model=representation_model.strip())
+                entity.generated_descriptions.create(text=text.strip(), corpus_size=corpus_size.strip(), representation_model=representation_model.strip())
 
 
     def handle(self, *args, **options):
