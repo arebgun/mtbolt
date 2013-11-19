@@ -11,7 +11,7 @@ PRODUCTION=os.environ.get('PRODUCTION', None)
 DATABASES = {}
 
 PROJECT_ROOT = abspath('.')
-    
+
 if not PRODUCTION:
     DEBUG = True
     DATABASES['default'] = {
@@ -25,8 +25,8 @@ if not PRODUCTION:
     STATIC_URL = '/static/'
 
 else: # production
-    DEBUG = False
-    #DEBUG = True
+    # DEBUG = False
+    DEBUG = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
