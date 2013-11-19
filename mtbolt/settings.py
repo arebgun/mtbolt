@@ -8,12 +8,12 @@ def abspath(*args):
     return os.path.abspath(os.path.join(currpath, '..', *args))
 
 PRODUCTION=os.environ.get('PRODUCTION', None)
+DEBUG = os.environ.get('DEBUG', False)
 DATABASES = {}
 
 PROJECT_ROOT = abspath('.')
 
 if not PRODUCTION:
-    DEBUG = True
     # DATABASES['default'] = {
     #     'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     #     'NAME': abspath('mtbolt.db'),                      # Or path to database file if using sqlite3.
@@ -22,7 +22,7 @@ if not PRODUCTION:
     #     'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
     #     'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     # }
-
+    DEBUG = True
     PG_USER = os.environ.get('PG_USER')
     PG_PASSWORD = os.environ.get('PG_PASSWORD')
 
@@ -37,8 +37,6 @@ if not PRODUCTION:
     STATIC_URL = '/static/'
 
 else: # production
-    # DEBUG = False
-    DEBUG = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
