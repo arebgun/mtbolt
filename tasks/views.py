@@ -46,14 +46,12 @@ def description(request):
         #     .filter(generated_descriptions__corpus_size=300) \
         #     .annotate(ans_count=Count('descriptions')) \
         #     .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
-        corpus_size = 600
-        model = 'model1'
 
         entities = Entity.objects \
             .annotate(ans_count=Count('descriptions')) \
             .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
 
-        student_desc = [e.generated_descriptions.filter(corpus_size=corpus_size).last() for e in entities]
+        student_desc = [e.generated_descriptions.filter(corpus_size=settings.CORPUS_SIZE, representation_model=settings.REPRESENTATION_MODEL)[0] for e in entities]
 
         #entities = Entity.objects.filter(generated_descriptions__corpus_size=300).values('scene', 'name', 'generated_descriptions__corpus_size', 'generated_descriptions__representation_model').annotate(ans_count=Count('descriptions')).order_by('?', 'ans_count')[:5]
 
