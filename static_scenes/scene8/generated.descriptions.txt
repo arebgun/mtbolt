@@ -1,2 +1,12 @@
-green;300;model1
-green block;600;model1
+1;violet;300;model1
+2;blue;300;model1
+3;red;300;model1
+4;yellow;300;model1
+5;red;300;model1
+6;yellow;300;model1
+1;violet block;600;model1
+2;blue tube;600;model1
+3;red ball;600;model1
+4;yellow ball;600;model1
+5;red disc;600;model1
+6;yellow block;600;model1

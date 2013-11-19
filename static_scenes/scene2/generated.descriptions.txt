@@ -1,2 +1,10 @@
-blue;300;model1
-blue block;600;model1
+1;yellow;300;model1
+2;violet;300;model1
+3;violet;300;model1
+4;green;300;model1
+5;violet;300;model1
+1;yellow block;600;model1
+2;violet block;600;model1
+3;violet block;600;model1
+4;green block;600;model1
+5;violet block;600;model1

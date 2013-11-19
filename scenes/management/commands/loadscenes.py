@@ -29,13 +29,14 @@ class Command(BaseCommand):
                 entity = Entity(name=entity_name, scene=scene)
                 entity.save()
 
-                with open(desc_path) as df:
-                    for dl in df:
-                        text, corpus_size, representation_model = dl.split(';')
-                        desc = GeneratedDescription(entity=entity, text=text.strip(), corpus_size=corpus_size.strip(), representation_model=representation_model.strip())
-                        desc.save()
-
             self.stdout.write("\n")
+
+        with open(desc_path) as df:
+            for dl in df:
+                ent_name, text, corpus_size, representation_model = dl.split(';')
+                entity = Entity.objects.get(scene__name=scene_name, name=ent_name)
+                desc = GeneratedDescription(entity=entity, text=text.strip(), corpus_size=corpus_size.strip(), representation_model=representation_model.strip())
+                desc.save()
 
 
     def handle(self, *args, **options):
