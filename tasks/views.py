@@ -18,15 +18,17 @@ def description(request):
         entities = []
         questions = []
         num_questions = int(request.POST['num_questions'])
+
         for i in xrange(1, num_questions+1):
             eid = request.POST['q%d_eid'%i]
             # ans = request.POST['q%d_ans'%i]
-            object_description = request.POST['q%d_obj'%i]
+            # object_description = request.POST['q%d_obj'%i]
             location_description = request.POST['q%d_loc'%i]
             e = Entity.objects.get(pk=eid)
             entities.append(e)
-            q = DescriptionQuestion(scene=e.scene, entity=e, object_description=object_description, location_description=location_description)
+            q = DescriptionQuestion(scene=e.scene, entity=e, object_description='', location_description=location_description)
             questions.append(q)
+
         task = DescriptionTask()
         # save task to get task.id
         task.save()
@@ -40,8 +42,21 @@ def description(request):
         # shuffle first, so that if two people start at the same time they
         # have a lesser chance of working on the same entities
         # NOTE this is very inefficient, but its the easiest way to do it
-        entities = Entity.objects.annotate(ans_count=Count('descriptions'))\
-                .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
+        # entities = Entity.objects \
+        #     .filter(generated_descriptions__corpus_size=300) \
+        #     .annotate(ans_count=Count('descriptions')) \
+        #     .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
+        corpus_size = 600
+        model = 'model1'
+
+        entities = Entity.objects \
+            .annotate(ans_count=Count('descriptions')) \
+            .order_by('?', 'ans_count')[:settings.BOLT_QUESTIONS_PER_TASK]
+
+        student_desc = [e.generated_descriptions.filter(corpus_size=corpus_size).last() for e in entities]
+
+        #entities = Entity.objects.filter(generated_descriptions__corpus_size=300).values('scene', 'name', 'generated_descriptions__corpus_size', 'generated_descriptions__representation_model').annotate(ans_count=Count('descriptions')).order_by('?', 'ans_count')[:5]
+
     return render_to_response('tasks/description.html',
-                              {'entities': entities},
+                              {'entities': zip(entities, student_desc)},
                               context_instance=RequestContext(request))

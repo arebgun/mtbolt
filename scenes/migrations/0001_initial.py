@@ -28,6 +28,17 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('scenes', ['Entity'])
 
+        # Adding model 'GeneratedDescription'
+        db.create_table('scenes_generateddescription', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('entity', self.gf('django.db.models.fields.related.ForeignKey')(related_name='generated_descriptions', to=orm['scenes.GeneratedDescription'])),
+            ('text', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('corpus_size', self.gf('django.db.models.fields.IntegerField')()),
+            ('representation_model', self.gf('django.db.models.fields.CharField')(max_length=6)),
+        ))
+        db.send_create_signal('scenes', ['GeneratedDescription'])
 
     def backwards(self, orm):
         # Deleting model 'Scene'
@@ -36,8 +47,21 @@ class Migration(SchemaMigration):
         # Deleting model 'Entity'
         db.delete_table('scenes_entity')
 
+        # Deleting model 'GeneratedDescription'
+        db.delete_table('scenes_generateddescriptions')
+
 
     models = {
+        'scenes.generateddescription': {
+            'Meta': {'object_name': 'GeneratedDescription'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'entity': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'generated_descriptions'", 'to': "orm['scenes.GeneratedDescription']"}),
+            'corpus_size': ('django.db.models.fields.IntegerField', [], {}),
+            'representation_model': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
+        },
         'scenes.entity': {
             'Meta': {'object_name': 'Entity'},
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),

@@ -11,6 +11,9 @@
 <ul>
     {% for entity in scene.entities.all %}
         <li>{{ entity.name }}</li>
+            {% for desc in entity.generated_descriptions.all %}
+                <li>{{ desc.text }} ({{ desc.corpus_size }}, {{ desc.representation_model }})</li>
+            {% endfor %}
     {% endfor %}
 </ul>
 {% endblock %}

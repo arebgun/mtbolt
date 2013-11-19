@@ -14,22 +14,23 @@
         font-size: 130%
     }
 </style>
-<h1>Describing Object Positions</h1>
-<h3>Instructions</h3>
+<h1>Teaching a Child How to Describe an Object on the Table</h1>
+<h2>Instructions</h2>
+<p class="instruction">Imagine you are in a room with a small child. In the middle of the room there is a table with multiple objects varying in size, color, shape and position. The child is about 18 months old, and can't yet speak in full sentences, but might be able to put together a sentence consisting of a few words (maybe even a single word) describing some aspect of the scene. This sentence can have bad grammar, can incorrectly name an object or any property of an object. <b>Your objective is to teach the child how to describe an object, using any of the features of an object itself, the relative or absolute position on table or in relation to other object on the table as well as parts of the table.</b> Elaborate on the sentence that the child produced as you would talking to a real human child.</p>
 <ul class="instruction">
-    <li>A sequence of pictures will be displayed.</li>
-    <li>Each picture contains a collection of objects on a table.</li>
-    <li>Each object is labelled with a number.</li>
+    <li>A sequence of scenes will be displayed.</li>
+    <li>Each scene contains a collection of objects on a table.</li>
+    <li>Each object is labeled with a number.</li>
 </ul>
 <ul class="instruction">
-    <li>We will ask you about one of the objects.</li>
-    <li>First, you will be asked to describe the object itself.</li>
-    <li>Then, you will be asked to describe the object's location.</li>
-    <ul>
+    <li>We will display the object number that you and a child are currently talking about.</li>
+    <li>You will be presented with a sentence produced by a child that describes this object.</li>
+    <li>Elaborate on the sentence produced by a child.</li>
+<!--     <ul>
         <li>You can use the other objects as reference</li>
         <li>You can also use the different parts of the table (side, corners, etc.)</li>
-    </ul>
-    <li>Do not use any of the object numbers in your description: describe objects using words.</li>
+    </ul> -->
+    <li><b>Do not use any of the object numbers in your sentences.</b></li>
     <li>Have fun!</li>
 </ul>
 <form action="." method="post">
@@ -38,49 +39,54 @@
            name="num_questions"
            id="num_questions"
            value="{{ entities|length }}" />
-    {% for e in entities %}
-    <hr />
-    <!--
-    <h2>{{ e.scene.name }}</h2>
-    -->
-    <img src="{{ e.scene.image.url }}">
-    <input type="hidden"
-           name="q{{ forloop.counter }}_eid"
-           id="q{{ forloop.counter }}_eid"
-           value="{{ e.pk }}" />
-    <br/>
-    <!--
-    Describe object N:
-    Object N is ______XX________
-    Describe the location of object N:
-    XX is ____________
-    -->
-    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe object {{ e.name }} in the scene above:</label>
-    <br/>
-    <label class="description_label"
-        id="q{{ forloop.counter }}_obj_lbl">
-        Object {{ e.name}} is
-    </label>
-    <input type="text"
-           name="q{{ forloop.counter }}_obj"
-           class="object_description"
-           id="q{{ forloop.counter }}_obj"
-           size="50"
-           maxlength="200" />
-    <br/>
-    <br/>
-    <label for="q{{ forloop.counter }}_ans" class="instruction">Complete the sentence to describe the position of object {{ e.name }} in the scene above:</label>
-    <br/>
-    <label class="object_label"
-        id="q{{ forloop.counter }}_dsc_lbl">
-        is
-    </label>
-    <input type="text"
-           name="q{{ forloop.counter }}_loc"
-           class="location_description"
-           id="q{{ forloop.counter }}_loc"
-           size="50"
-           maxlength="200" />
+    {% for e,s in entities %}
+      <hr />
+
+      <!-- <h2>{{ e.scene.name }}</h2> -->
+      <h2>Tabletop Scene {{ forloop.counter }}.</h2>
+
+      <img src="{{ e.scene.image.url }}">
+      <input type="hidden"
+             name="q{{ forloop.counter }}_eid"
+             id="q{{ forloop.counter }}_eid"
+             value="{{ e.pk }}" />
+      <br/>
+      <!--
+      Describe object N:
+      Object N is ______XX________
+      Describe the location of object N:
+      XX is ____________
+      -->
+      <label for="q{{ forloop.counter }}_ans" class="instruction"><b>You and the child are currently talking about <i>Object {{ e.name }}</i> in the scene above.</b></label>
+      <br/>
+      <label for="q{{ forloop.counter }}_ans" class="instruction">The child produces the following sentence about <i>Object {{ e.name }}</i>:</label>
+      <br/>
+      <label class="description_label"
+          id="q{{ forloop.counter }}_obj_lbl">
+          <!-- Object {{ e.name}} is --><h2><font color="Maroon">{{ s }}</font></h2>
+      </label>
+  <!--     <input type="text"
+             name="q{{ forloop.counter }}_obj"
+             class="object_description"
+             id="q{{ forloop.counter }}_obj"
+             size="50"
+             maxlength="200" /> -->
+      <br/>
+      <label for="q{{ forloop.counter }}_ans" class="instruction">Elaborate on the sentence produced by the child describing <i>Object {{ e.name }}</i> in the scene above:</label>
+      <br/>
+      <label class="object_label"
+          id="q{{ forloop.counter }}_dsc_lbl">
+          <!-- is -->
+      </label>
+      <input type="text"
+             name="q{{ forloop.counter }}_loc"
+             class="location_description"
+             id="q{{ forloop.counter }}_loc"
+             size="120"
+             maxlength="200" />
+      <br/>
+      <br/>
+      <br/>
     {% endfor %}
     <hr /><br />
     <input type="submit" value="submit" />

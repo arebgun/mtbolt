@@ -28,3 +28,15 @@ class Entity(CommonInfo):
 
     def __unicode__(self):
         return self.name
+
+class GeneratedDescription(CommonInfo):
+    entity = models.ForeignKey(Entity, related_name='generated_descriptions')
+    text = models.CharField(max_length=200)
+    corpus_size = models.IntegerField()
+    representation_model = models.CharField(max_length=6)
+
+    class Meta:
+        verbose_name_plural = 'generated_descriptions'
+
+    def __unicode__(self):
+        return self.text

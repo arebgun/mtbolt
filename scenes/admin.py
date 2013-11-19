@@ -1,5 +1,5 @@
 from django.contrib import admin
-from scenes.models import Scene, Entity
+from scenes.models import Scene, Entity, GeneratedDescription
 
 class EntityInline(admin.TabularInline):
     model = Entity
